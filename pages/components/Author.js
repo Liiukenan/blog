@@ -10,7 +10,7 @@ const Author=(props)=>{
      return (
           <div className="author-div comm-box ">
             <div> 
-            <Avatar size={100} src="/images/baby.jpg"/>
+            <Avatar size={100} src="./images/baby.jpg"/>
             </div>
             <div className="author-introduction">
                 夏婷婷，专注于赚钱与花钱。立誓要一月花掉一千万的国际前沿时尚女性。

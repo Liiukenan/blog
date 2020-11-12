@@ -4,7 +4,7 @@ import Header from './components/Header'
 import Author from './components/Author'
 import Advert from './components/Advert'
 import Footer from './components/Footer'
-import {Row,Col,Menu,List} from 'antd'
+import {Row,Col,Menu,List,Breadcrumb} from 'antd'
 
 
 import {
@@ -12,7 +12,7 @@ import {
   FolderOpenOutlined,
   FireOutlined
 } from '@ant-design/icons';
-export default function Home() {
+export default function Lists() {
   const [ mylist , setMylist ] = useState(
     [
       {title:'50元加入花钱小密圈 婷婷带你学一年',context:'50元跟着婷婷学一年，掌握合理购物的学习方法。 也许你刚学会花钱，也许你遇到了有钱画不出的难题，也许你不知道该学习什么样的花钱方法，也许你不知道怎样像大家一样花的潇洒，也许...........有些时候你陷入彷徨。 你需要一个强力的队友，你需要一个资深老手，你需要一个随时可以帮助你的人，你更需要一个陪你加速前行的。 婷婷在淘宝行业走了12年，从衣服、化妆品到首饰包包都有购买经验，从中走了很多坑，但我有一套适合剁手小姐妹的学习方法。 如果你愿意，我将带着你在这个剁手行业加速奔跑。分享我花钱的方法，所学的内容和一切我的资料。 你遇到的钱难花问题，我也会第一时间帮你花光。我需要先感谢一直帮助我的老公，不管我什么时候，都站在我那一边，如果没有老公的支持和鼓励，我可能早都放弃购物。 原来我博客只是免费教购物，然后求30元的打赏。 每次打赏我都会觉得内疚，因为我并没有给你特殊的照顾，也没能从实质上帮助过你花很多钱。 直到朋友给我介绍了LV,古驰，爱马仕，它可以专享购买，可以解答钱难花问题，所以我如获珍宝，决定把打赏环节改为知识服务。我定价50元每年，为什么是50元每年？因为这是我老公允许的最低收费了。'},
@@ -24,12 +24,18 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>夏婷婷的blog1</title>
+        <title>夏婷婷的blog</title>
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">
         <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14} >
+          <div className="bread-div">
+            <Breadcrumb>
+              <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
+              <Breadcrumb.Item>视频列表</Breadcrumb.Item>
+            </Breadcrumb>
+          </div>
           <List header={<div>最新日志</div>} itemLayout="vertical" dataSource={mylist} renderItem={
             item=>(
               <List.Item>
