@@ -8,6 +8,7 @@ import Author from "./components/Author";
 import "./static/styles/components/details.styl";
 import ReactMarkdown from 'react-markdown'
 import MarkNav from 'markdown-navbar';
+import axios from 'axios';
 import 'markdown-navbar/dist/navbar.css';
 import {
   CalendarOutlined,
@@ -117,4 +118,12 @@ const Details = () => {
     </div>
   );
 };
+
+Details.getInitialProps = async (ctx) => {
+    let id=ctx.query.id
+    const res=await axios.get('http://127.0.0.1:7001/default/getArticleById/'+id)
+    return {
+        data:res.data
+    }
+}
 export default Details;

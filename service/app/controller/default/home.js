@@ -1,11 +1,37 @@
-'use strict';
+"use strict";
 
-const Controller = require('egg').Controller;
+const Controller = require("egg").Controller;
 
 class HomeController extends Controller {
   async index() {
-    const { ctx } = this;
-    ctx.body = 'hi, eggfssssfadfdsaf2341432';
+    // 连接mysql数据库
+    let result = await this.app.mysql.get("blog_content", {});
+    this.ctx.body = result;
+  }
+  async getArticleList() {
+    //获取文章列表
+    let sql = `SELECT type_id AS id, 
+             title AS title, 
+             introduce AS introduce,
+             FROM_UNIXTIME(add_time,'%Y-%m-%d %H:%i:%s') AS addTime, 
+             type_name AS typeName,
+             article_content AS articleContent, 
+             view_count AS viewCount FROM article`;
+    const results = await this.app.mysql.query(sql);
+    this.ctx.body = { data: results };
+  }
+  async getArticleById() {
+    let id = this.ctx.params.id;
+    let sql = `SELECT id AS id, 
+             title AS title, 
+             introduce AS introduce,
+             FROM_UNIXTIME(add_time,'%Y-%m-%d %H:%i:%s') AS addTime, 
+             type_name AS typeName,
+             article_content AS articleContent, 
+             view_count AS viewCount FROM article
+             WHERE id='${id}'`;
+    const result=await this.app.mysql.query(sql);
+    this.ctx.body={data:result};
   }
 }
 

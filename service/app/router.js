@@ -5,5 +5,4 @@
  */
 module.exports = app => {
   require('./routers/default')(app)
-  
 };
