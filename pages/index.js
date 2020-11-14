@@ -13,8 +13,7 @@ import {
   FireOutlined
 } from '@ant-design/icons';
 const Home=(list)=>{
-  const [ mylist , setMylist ] = useState(list.data.data)
-  console.log(mylist);
+  const [ mylist , setMylist ] = useState(list.data)
   return (
     <div>
       <Head>
@@ -69,9 +68,9 @@ const Home=(list)=>{
 
 
 Home.getInitialProps = async (ctx) => {
-    const res=await axios.get('http://127.0.0.1:7001/default/getArticleList')
+    const res=await axios.get('http://127.0.0.1:7001/getArticleList')
     return {
-        data:res.data
+      data:res.data
     }
 }
 export default Home
