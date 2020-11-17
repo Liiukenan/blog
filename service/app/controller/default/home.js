@@ -30,13 +30,28 @@ class HomeController extends Controller {
              article_content AS articleContent, 
              view_count AS viewCount FROM article
              WHERE id='${id}'`;
-    const result=await this.app.mysql.query(sql);
-    this.ctx.body=result;
+    const result = await this.app.mysql.query(sql);
+    this.ctx.body = result;
   }
+  async getTypeInfo() {
+    //获取类别名称和编号
+    const result = await this.app.mysql.select("type");
+    this.ctx.body = result;
+  }
+  async getTypeList() {
+    let id = this.ctx.params.id;
+    let sql = `SELECT type_id AS typeId,
+             title AS title, 
+             introduce AS introduce,
+             FROM_UNIXTIME(add_time,"%Y-%m-%d %H:%i:%s") AS addTime, 
+             type_name AS typeName,
+             article_content AS articleContent, 
+             view_count AS viewCount FROM article
+             WHERE type_id='${id}'`;
+    const result = await this.app.mysql.query(sql);
+    this.ctx.body = result;
+  }
+
 }
 
 module.exports = HomeController;
-
-// RESTful 移动 app  前后端分离  具有，简单，约束性特性
-// 请求方式 get 获取资源  post 新建资源 put 修改资源  delete 删除资源
-

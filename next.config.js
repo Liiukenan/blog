@@ -1,14 +1,14 @@
 // next.config.js
-const withStylus = require("@zeit/next-stylus");
 const withCSS = require("@zeit/next-css");
+const withStylus = require("@zeit/next-stylus");
 
 if (typeof require !== "undefined") {
   require.extensions[".css"] = (file) => {};
 }
 
-module.exports = withStylus({
+module.exports = withCSS({
   webpack(config, ...args) {
-    config = withCSS().webpack(config, ...args);
+    config = withStylus().webpack(config, ...args);
     return config;
   },
   devIndicators: {

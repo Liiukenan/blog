@@ -13,6 +13,8 @@ import MarkNav from "markdown-navbar";
 import axios from "axios";
 import "markdown-navbar/dist/navbar.css";
 import Tocify from "./components/tocify.tsx";
+import servicePath from "../config/servicePath";
+
 import {
   CalendarOutlined,
   FolderOpenOutlined,
@@ -23,10 +25,6 @@ const Details = (detailsData) => {
   const tocify = new Tocify();
   renderer.heading = function (text, level, raw) {
     const anchor = tocify.add(text, level);
-    console.log("====================================");
-    console.log(
-      `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>`
-    );
     return `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>\n`;
   };
 
@@ -109,7 +107,7 @@ const Details = (detailsData) => {
 
 Details.getInitialProps = async (ctx) => {
   let id = ctx.query.id;
-  const res = await axios.get("http://127.0.0.1:7001/getArticleById/" + id);
+  const res = await axios.get(servicePath.getArticleById + id);
   return res.data[0];
 };
 export default Details;
