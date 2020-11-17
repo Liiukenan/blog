@@ -12,7 +12,7 @@ import "highlight.js/styles/monokai.css";
 import MarkNav from "markdown-navbar";
 import axios from "axios";
 import "markdown-navbar/dist/navbar.css";
-
+import Tocify from "./components/tocify.tsx";
 import {
   CalendarOutlined,
   FolderOpenOutlined,
@@ -20,6 +20,16 @@ import {
 } from "@ant-design/icons";
 const Details = (detailsData) => {
   const renderer = new marked.Renderer();
+  const tocify = new Tocify();
+  renderer.heading = function (text, level, raw) {
+    const anchor = tocify.add(text, level);
+    console.log("====================================");
+    console.log(
+      `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>`
+    );
+    return `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>\n`;
+  };
+
   marked.setOptions({
     renderer: renderer,
     gfm: true,
@@ -87,12 +97,7 @@ const Details = (detailsData) => {
           <Affix offsetTop={5}>
             <div className="detailed-nav comm-box">
               <div className="nav-title">文章目录</div>
-              <MarkNav
-                className="article-menu"
-                source={html}
-                ordered={false}
-                headingTopOffset={0}
-              />
+              {tocify && tocify.render()}
             </div>
           </Affix>
         </Col>
