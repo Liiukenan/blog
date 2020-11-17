@@ -1,19 +1,18 @@
 // next.config.js
-const withCSS = require('@zeit/next-css')
-const withStylus = require('@zeit/next-stylus')
+const withStylus = require("@zeit/next-stylus");
+const withCSS = require("@zeit/next-css");
 
-if (typeof require !== 'undefined') {
-  require.extensions['.css'] = file => {}
+if (typeof require !== "undefined") {
+  require.extensions[".css"] = (file) => {};
 }
 
 module.exports = withStylus({
-      webpack(config, ...args){
-        config = withCSS().webpack(config, ...args);
-        return config;
-      },
-      devIndicators: {
-          autoPrerender: false,
-      },
-      assetPrefix: './'
-      
-})
+  webpack(config, ...args) {
+    config = withCSS().webpack(config, ...args);
+    return config;
+  },
+  devIndicators: {
+    autoPrerender: false,
+  },
+  assetPrefix: "./",
+});

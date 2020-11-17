@@ -13,5 +13,7 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: {},
+  rules: {
+    "eslint-disable-next-line": "no-undef",
+  },
 };
