@@ -5,16 +5,38 @@ import Header from "./components/Header";
 import Author from "./components/Author";
 import Advert from "./components/Advert";
 import Footer from "./components/Footer";
+
 import { Row, Col, Menu, List } from "antd";
 import axios from "axios";
 import servicePath from "../config/servicePath";
+import marked from "marked";
+import hljs from "highlight.js";
+import "highlight.js/styles/monokai-sublime.css";
+import "./static/styles/components/index.styl"
 import {
   CalendarOutlined,
   FolderOpenOutlined,
   FireOutlined,
 } from "@ant-design/icons";
 const Home = (list) => {
+  const renderer = new marked.Renderer();
+  marked.setOptions({
+    renderer: renderer,
+    gfm: true,
+    pedantic: false,
+    sanitize: false,
+    tables: true,
+    breaks: false,
+    smartLists: true,
+    smartypants: false,
+    highlight: function (code) {
+      return hljs.highlightAuto(code).value;
+    },
+  });
   const [mylist, setMylist] = useState(list.data);
+  
+
+
   return (
     <div>
       <Head>
@@ -52,7 +74,7 @@ const Home = (list) => {
                     {item.viewCount}人
                   </span>
                 </div>
-                <div className="list-context">{item.articleContent}</div>
+                <div className="list-context" dangerouslySetInnerHTML={{__html:marked(item.articleContent)}}></div>
               </List.Item>
             )}
           />

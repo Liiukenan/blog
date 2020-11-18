@@ -9,12 +9,11 @@ import "./static/styles/components/details.styl";
 import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai.css";
-import MarkNav from "markdown-navbar";
+// import MarkNav from "markdown-navbar";
 import axios from "axios";
-import "markdown-navbar/dist/navbar.css";
+// import "markdown-navbar/dist/navbar.css";
 import Tocify from "./components/tocify.tsx";
 import servicePath from "../config/servicePath";
-
 import {
   CalendarOutlined,
   FolderOpenOutlined,
@@ -27,7 +26,6 @@ const Details = (detailsData) => {
     const anchor = tocify.add(text, level);
     return `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>\n`;
   };
-
   marked.setOptions({
     renderer: renderer,
     gfm: true,
