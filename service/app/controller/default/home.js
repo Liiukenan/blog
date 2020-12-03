@@ -16,7 +16,8 @@ class HomeController extends Controller {
              FROM_UNIXTIME(add_time,'%Y-%m-%d %H:%i:%s') AS addTime, 
              type_name AS typeName,
              article_content AS articleContent, 
-             view_count AS viewCount FROM article`;
+             view_count AS viewCount FROM article
+             ORDER BY id DESC`;
     const results = await this.app.mysql.query(sql);
     this.ctx.body = results;
   }
@@ -47,7 +48,8 @@ class HomeController extends Controller {
              type_name AS typeName,
              article_content AS articleContent, 
              view_count AS viewCount FROM article
-             WHERE type_id='${id}'`;
+             WHERE type_id='${id}'
+             ORDER BY id DESC`;
     const result = await this.app.mysql.query(sql);
     this.ctx.body = result;
   }

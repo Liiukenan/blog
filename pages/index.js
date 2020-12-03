@@ -89,7 +89,9 @@ const Home = (list) => {
   );
 };
 Home.getInitialProps = async (ctx) => {
+  
   const res = await axios.get(servicePath.getArticleList);
+  
   return {
     data: res.data,
   };
