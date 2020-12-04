@@ -1,5 +1,5 @@
 import React from "react";
-import "../static/styles/components/advert.styl"
+import "../pages/static/styles/components/advert.styl"
 const Avert = (props) => {
   return (
     <div className="ad-div comm-box">

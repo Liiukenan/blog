@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import '../static/styles/components/header.styl'
+import '../pages/static/styles/components/header.styl'
 import { Row, Col, Menu } from 'antd'
 import Router from 'next/router'
 import Link from 'next/link'
 import axios from 'axios'
-import servicePath from '../../config/servicePath'
+import servicePath from '../config/servicePath'
 
 // import {
 //   HomeOutlined,

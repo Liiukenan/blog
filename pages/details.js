@@ -1,10 +1,10 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import Head from "next/head";
 import { Row, Col, Breadcrumb, Affix } from "antd";
-import Header from "./components/Header";
-import Advert from "./components/Advert";
-import Footer from "./components/Footer";
-import Author from "./components/Author";
+import Header from "../components/Header";
+import Advert from "../components/Advert";
+import Footer from "../components/Footer";
+import Author from "../components/Author";
 import "./static/styles/components/details.styl";
 import marked from "marked";
 import hljs from "highlight.js";
@@ -12,7 +12,7 @@ import "highlight.js/styles/monokai.css";
 // import MarkNav from "markdown-navbar";
 import axios from "axios";
 // import "markdown-navbar/dist/navbar.css";
-import Tocify from "./components/tocify.tsx";
+import Tocify from "../components/tocify.tsx";
 import servicePath from "../config/servicePath";
 import {
   CalendarOutlined,
@@ -22,10 +22,15 @@ import {
 const Details = (detailsData) => {
   const renderer = new marked.Renderer();
   const tocify = new Tocify();
+  // const [detailsData,setDatilsData]=useState({});
   renderer.heading = function (text, level, raw) {
     const anchor = tocify.add(text, level);
     return `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>\n`;
   };
+  useEffect(() => {
+    // setDatilsData()
+    // console.log(props)
+  }, []);
   marked.setOptions({
     renderer: renderer,
     gfm: true,
@@ -39,7 +44,8 @@ const Details = (detailsData) => {
       return hljs.highlightAuto(code).value;
     },
   });
-  let html = marked(detailsData.articleContent);
+  // datailsData?detailsData:{};
+  let html = marked(detailsData.data.articleContent);
   return (
     <div>
       <Head>
@@ -60,20 +66,19 @@ const Details = (detailsData) => {
             </div>
 
             <div>
-              <div className="detailed-title">{detailsData.title}</div>
-
+              <div className="detailed-title">{detailsData.data.title}</div>
               <div className="list-icon center">
                 <span>
                   <CalendarOutlined />
-                  {detailsData.addTime}
+                  {detailsData.data.addTime}
                 </span>
                 <span>
                   <FolderOpenOutlined />
-                  {detailsData.typeName}
+                  {detailsData.data.typeName}
                 </span>
                 <span>
                   <FireOutlined />
-                  {detailsData.viewCount}
+                  {detailsData.data.viewCount}
                 </span>
               </div>
 
@@ -81,7 +86,7 @@ const Details = (detailsData) => {
                 className="detailed-content"
                 dangerouslySetInnerHTML={{ __html: html }}
               >
-                {/* <ReactMarkdown source={markdown} escapeHtml={false} /> */}
+             
               </div>
             </div>
           </div>
@@ -106,6 +111,12 @@ const Details = (detailsData) => {
 Details.getInitialProps = async (ctx) => {
   let id = ctx.query.id;
   const res = await axios.get(servicePath.getArticleById + id);
-  return res.data[0];
+  return {
+    data:res.data[0]
+  }
 };
+
+
+
+
 export default Details;
