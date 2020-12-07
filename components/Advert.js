@@ -1,9 +1,9 @@
 import React from "react";
-import "../pages/static/styles/components/advert.styl"
+import "../static/styles/components/advert.styl"
 const Avert = (props) => {
   return (
     <div className="ad-div comm-box">
-      <div>
+      {/* <div>
         <img src="http://blogimages.jspang.com/flutter_ad2.jpg" width="100%" />
       </div>
       <div>
@@ -11,7 +11,7 @@ const Avert = (props) => {
       </div>
       <div>
         <img src="http://blogimages.jspang.com/WechatIMG12.jpeg" width="100%" />
-      </div>
+      </div> */}
     </div>
   );
 };

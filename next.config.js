@@ -6,13 +6,9 @@ if (typeof require !== "undefined") {
   require.extensions[".css"] = (file) => {};
 }
 
-module.exports = withCSS({
-  webpack(config, ...args) {
-    config = withStylus().webpack(config, ...args);
-    return config;
-  },
+module.exports = withCSS(withStylus({
   devIndicators: {
     autoPrerender: false,
   },
   assetPrefix: "./",
-});
+}));

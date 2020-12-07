@@ -12,7 +12,7 @@ import servicePath from "../config/servicePath";
 import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
-import "./static/styles/components/index.styl"
+import "../static/styles/components/index.styl"
 import {
   CalendarOutlined,
   FolderOpenOutlined,
@@ -40,7 +40,7 @@ const Home = (list) => {
   return (
     <div>
       <Head>
-        <title>夏婷婷的blog</title>
+        <title>Goldaner的生活记录仪</title>
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"

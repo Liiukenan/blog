@@ -1,5 +1,5 @@
 import React from "react";
-import "../pages/static/styles/components/footer.styl"
+import "../static/styles/components/footer.styl"
 const Footer = (props) => {
   return (
     <div className="footer-div">

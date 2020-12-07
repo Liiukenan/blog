@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../pages/static/styles/components/header.styl'
+import '../static/styles/components/header.styl'
 import { Row, Col, Menu } from 'antd'
 import Router from 'next/router'
 import Link from 'next/link'
@@ -37,8 +37,8 @@ const Header = (props) => {
     <div className="header">
       <Row type="flex" justify="center">
         <Col xs={24} sm={24} md={10} lg={15} xl={12}>
-          <span className="header-logo">夏婷婷</span>
-          <span className="header-txt">专注淘宝购物，一天购买一千件</span>
+          <span className="header-logo">Goldaner</span>
+          <span className="header-txt">记录生活点滴，记录web前端</span>
         </Col>
         <Col xs={24} sm={24} md={14} lg={8} xl={6}>
           <Menu mode="horizontal" onClick={handleClick}>

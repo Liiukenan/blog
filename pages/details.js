@@ -1,36 +1,43 @@
-import React,{useEffect, useState} from "react";
-import Head from "next/head";
-import { Row, Col, Breadcrumb, Affix } from "antd";
-import Header from "../components/Header";
-import Advert from "../components/Advert";
-import Footer from "../components/Footer";
-import Author from "../components/Author";
-import "./static/styles/components/details.styl";
-import marked from "marked";
-import hljs from "highlight.js";
-import "highlight.js/styles/monokai.css";
+import React, { useEffect, useState } from 'react'
+import Head from 'next/head'
+import { Row, Col, Breadcrumb, Affix } from 'antd'
+import Header from '../components/Header'
+import Advert from '../components/Advert'
+import Footer from '../components/Footer'
+import Author from '../components/Author'
+import '../static/styles/components/details.styl'
+import marked from 'marked'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/monokai.css'
+import Router from 'next/router'
+import utils from '../static/js/utils'
 // import MarkNav from "markdown-navbar";
-import axios from "axios";
+import axios from 'axios'
 // import "markdown-navbar/dist/navbar.css";
-import Tocify from "../components/tocify.tsx";
-import servicePath from "../config/servicePath";
+import Tocify from '../components/tocify.tsx'
+import servicePath from '../config/servicePath'
 import {
   CalendarOutlined,
   FolderOpenOutlined,
-  FireOutlined,
-} from "@ant-design/icons";
-const Details = (detailsData) => {
-  const renderer = new marked.Renderer();
-  const tocify = new Tocify();
-  // const [detailsData,setDatilsData]=useState({});
+  FireOutlined
+} from '@ant-design/icons'
+const Details = () => {
+  const renderer = new marked.Renderer()
+  const tocify = new Tocify()
+  const [detailsData, setDatilsData] = useState({})
+  const [html, setHtml] = useState('')
+
   renderer.heading = function (text, level, raw) {
-    const anchor = tocify.add(text, level);
-    return `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>\n`;
-  };
+    const anchor = tocify.add(text, level)
+    return `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>\n`
+  }
   useEffect(() => {
-    // setDatilsData()
-    // console.log(props)
-  }, []);
+    const id = utils.getQueryVariable('id')
+    axios.get(`${servicePath.getArticleById}${id}`).then((res) => {
+      setDatilsData(res.data[0])
+      setHtml(marked(res.data[0].articleContent))
+    })
+  }, [])
   marked.setOptions({
     renderer: renderer,
     gfm: true,
@@ -41,11 +48,10 @@ const Details = (detailsData) => {
     smartLists: true,
     smartypants: false,
     highlight: function (code) {
-      return hljs.highlightAuto(code).value;
-    },
-  });
-  // datailsData?detailsData:{};
-  let html = marked(detailsData.data.articleContent);
+      return hljs.highlightAuto(code).value
+    }
+  })
+
   return (
     <div>
       <Head>
@@ -66,28 +72,26 @@ const Details = (detailsData) => {
             </div>
 
             <div>
-              <div className="detailed-title">{detailsData.data.title}</div>
+              <div className="detailed-title">{detailsData.title}</div>
               <div className="list-icon center">
                 <span>
                   <CalendarOutlined />
-                  {detailsData.data.addTime}
+                  {detailsData.addTime}
                 </span>
                 <span>
                   <FolderOpenOutlined />
-                  {detailsData.data.typeName}
+                  {detailsData.typeName}
                 </span>
                 <span>
                   <FireOutlined />
-                  {detailsData.data.viewCount}
+                  {detailsData.viewCount}
                 </span>
               </div>
 
               <div
                 className="detailed-content"
                 dangerouslySetInnerHTML={{ __html: html }}
-              >
-             
-              </div>
+              ></div>
             </div>
           </div>
         </Col>
@@ -105,18 +109,7 @@ const Details = (detailsData) => {
       </Row>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-Details.getInitialProps = async (ctx) => {
-  let id = ctx.query.id;
-  const res = await axios.get(servicePath.getArticleById + id);
-  return {
-    data:res.data[0]
-  }
-};
-
-
-
-
-export default Details;
+export default Details

@@ -1,4 +1,4 @@
-let ipUrl = "http://188.131.143.196:7001"; //接口
+let ipUrl = "http://152.136.19.118:7001"; //接口
 let servicePath = {
   getArticleList: ipUrl + "/getArticleList", //首页接口
   getArticleById: ipUrl + "/getArticleById/", //详细页接口
