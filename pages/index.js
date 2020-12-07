@@ -5,7 +5,6 @@ import Header from "../components/Header";
 import Author from "../components/Author";
 import Advert from "../components/Advert";
 import Footer from "../components/Footer";
-
 import { Row, Col, Menu, List } from "antd";
 import axios from "axios";
 import servicePath from "../config/servicePath";
@@ -56,7 +55,7 @@ const Home = (list) => {
             renderItem={(item) => (
               <List.Item>
                 <div className="list-title">
-                  <Link href={{ pathname: "details", query: { id: item.id } }}>
+                  <Link  href={{pathname:"details",query:{id:item.id}}}>
                     <a>{item.title}</a>
                   </Link>
                 </div>

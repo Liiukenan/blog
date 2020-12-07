@@ -10,10 +10,11 @@ import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai.css'
 import Router from 'next/router'
-import utils from '../static/js/utils'
+import utils from '../lib/utils'
 // import MarkNav from "markdown-navbar";
 import axios from 'axios'
 // import "markdown-navbar/dist/navbar.css";
+import { withRouter } from 'next/router'
 import Tocify from '../components/tocify.tsx'
 import servicePath from '../config/servicePath'
 import {
@@ -21,17 +22,17 @@ import {
   FolderOpenOutlined,
   FireOutlined
 } from '@ant-design/icons'
-const Details = () => {
+const Details = (props) => {
   const renderer = new marked.Renderer()
   const tocify = new Tocify()
   const [detailsData, setDatilsData] = useState({})
   const [html, setHtml] = useState('')
-
   renderer.heading = function (text, level, raw) {
     const anchor = tocify.add(text, level)
     return `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>\n`
   }
   useEffect(() => {
+    console.log(props.router)
     const id = utils.getQueryVariable('id')
     axios.get(`${servicePath.getArticleById}${id}`).then((res) => {
       setDatilsData(res.data[0])
@@ -112,4 +113,4 @@ const Details = () => {
   )
 }
 
-export default Details
+export default withRouter(Details)

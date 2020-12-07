@@ -5,28 +5,21 @@ import Router from 'next/router'
 import Link from 'next/link'
 import axios from 'axios'
 import servicePath from '../config/servicePath'
+import store from "../store";
 
-// import {
-//   HomeOutlined,
-//   VideoCameraOutlined,
-//   SmileOutlined
-// } from '@ant-design/icons'
-
-import * as Icon from '@ant-design/icons';
+import * as Icon from '@ant-design/icons'
 const Header = (props) => {
+  const hoxData = store();
   const [navArray, setNavArray] = useState([])
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(servicePath.getTypeInfo).then((res) => {
-        return res.data
-      })
-      setNavArray(result)
-    }
-    fetchData()
+    axios(servicePath.getTypeInfo).then((res) => {
+      setNavArray(res.data)
+    })
   }, [])
   //   []只有第一次进入组件执行
 
-  const handleClick = (e) => {
+  const handleClick =async (e) => {
+    hoxData.handleClickId(e.key);
     if (e.key == 0) {
       Router.push('/')
     } else {

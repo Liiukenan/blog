@@ -10,7 +10,7 @@ const Author=(props)=>{
      return (
           <div className="author-div comm-box ">
             <div> 
-            <Avatar size={100} src="./images/baby.jpg"/>
+            <Avatar size={100} src="../images/baby.jpg"/>
             </div>
             <div className="author-introduction">
                 关注前沿web技术，记录生活点滴

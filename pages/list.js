@@ -10,17 +10,19 @@ import axios from 'axios'
 import Link from 'next/link'
 import marked from 'marked'
 import hljs from 'highlight.js'
-import utils from '../static/js/utils'
+import utils from '../lib/utils'
 import 'highlight.js/styles/monokai-sublime.css'
 import '../static/styles/components/index.styl'
+import store from '../store'
 import {
   CalendarOutlined,
   FolderOpenOutlined,
   FireOutlined
 } from '@ant-design/icons'
 function Lists() {
-  const [mylist, setMylist] = useState(null)
+  const [mylist, setMylist] = useState([])
   const renderer = new marked.Renderer()
+  const hoxData=store()
   marked.setOptions({
     renderer: renderer,
     gfm: true,
@@ -34,14 +36,22 @@ function Lists() {
       return hljs.highlightAuto(code).value
     }
   })
-  useEffect(() => {
-    const id = utils.getQueryVariable('id')
+  const getData=(id)=>{
+    console.log()
     axios.get(`${servicePath.getTypeList}${id}`).then((res) => {
       setMylist(res.data)
     })
-  }, [])
-  if(!mylist) return false;
-    return (
+  }
+  useEffect(() => {
+    console.log(2)
+    getData(utils.getQueryVariable('id'));
+  }, [hoxData.id]);
+  useEffect(() => {
+    console.log(1)
+    getData(utils.getQueryVariable('id'));
+    hoxData.handleClickId(utils.getQueryVariable('id'))
+  }, []);
+  return (
       <div>
         <Head>
           <title>Goldaner的生活记录仪</title>
@@ -58,7 +68,7 @@ function Lists() {
                 <Breadcrumb.Item>
                   <a href="/">首页</a>
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>{mylist[0].typeName}</Breadcrumb.Item>
+                <Breadcrumb.Item>{mylist.length!=0 && mylist[0].typeName}</Breadcrumb.Item>
               </Breadcrumb>
             </div>
             <List
