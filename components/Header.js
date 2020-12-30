@@ -1,30 +1,42 @@
-import React, { useEffect, useState } from 'react'
-import '../static/styles/components/header.styl'
+import React, { useEffect, useState,useContext } from 'react'
+import '../static/styles/components/header.css'
 import { Row, Col, Menu } from 'antd'
 import Router from 'next/router'
 import Link from 'next/link'
 import axios from 'axios'
 import servicePath from '../config/servicePath'
-import store from "../store";
-
+// import store from "../store";
 import * as Icon from '@ant-design/icons'
+import { context } from '../store'
 const Header = (props) => {
-  const hoxData = store();
+  // const hoxData = store();
   const [navArray, setNavArray] = useState([])
+  const setId = useContext(context)[1]
   useEffect(() => {
-    axios(servicePath.getTypeInfo).then((res) => {
-      setNavArray(res.data)
+    // axios(servicePath.getTypeInfo).then((res) => {
+    //   setNavArray(res.data)
+    // })
+
+
+    axios({
+      method: 'get',
+      url: servicePath.getTypeInfo,
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).then((result) => {
+      setNavArray(result.data)
     })
+    
   }, [])
   //   []只有第一次进入组件执行
 
   const handleClick =async (e) => {
-    hoxData.handleClickId(e.key);
-    if (e.key == 0) {
-      Router.push('/')
-    } else {
-      Router.push('/list?id=' + e.key)
-    }
+    await setId(e.key)
+    // await Router.push('/')
+    // hoxData.handleClickId(e.key);
+    Router.push('/?typeid=' + e.key)
   }
   return (
     <div className="header">

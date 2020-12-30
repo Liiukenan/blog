@@ -41,7 +41,8 @@ class HomeController extends Controller {
   }
   async getTypeList() {
     let id = this.ctx.params.id;
-    let sql = `SELECT type_id AS typeId,
+    let sql = `SELECT id AS id,
+             type_id AS typeId,
              title AS title, 
              introduce AS introduce,
              FROM_UNIXTIME(add_time,"%Y-%m-%d %H:%i:%s") AS addTime, 

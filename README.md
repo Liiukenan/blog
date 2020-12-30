@@ -4,3 +4,10 @@
 ### `yarn add egg-mysql`
 ### 跨域
 ### `egg-cors`
+
+
+### pm2进程守护
+
+### pm2关闭
+
+

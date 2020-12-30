@@ -1,6 +1,6 @@
 import React from 'react'
 import {Avatar,Divider} from 'antd'
-import '../static/styles/components/avator.styl'
+import '../static/styles/components/avator.css'
 import {
   GithubOutlined,
   QqOutlined,

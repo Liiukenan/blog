@@ -3,9 +3,9 @@ module.exports = {
     name: '正式环境',
     env: 'build',
     ssh: {
-      host: '188.131.143.196',
+      host: '152.136.19.118',
       username: 'root',
-      password: 'Aini1314',
+      password: 'Aini=1314',
     },
     buildCommand: 'build',
     localPath: 'out',

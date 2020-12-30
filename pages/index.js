@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import {withRouter} from 'next/router' 
 import Head from "next/head";
 import Link from "next/link";
 import Header from "../components/Header";
@@ -11,12 +12,14 @@ import servicePath from "../config/servicePath";
 import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/monokai-sublime.css";
-import "../static/styles/components/index.styl"
+import "../static/styles/components/index.css"
+import utils from "../lib/utils"
 import {
   CalendarOutlined,
   FolderOpenOutlined,
   FireOutlined,
 } from "@ant-design/icons";
+import { context } from "../store";
 const Home = (list) => {
   const renderer = new marked.Renderer();
   marked.setOptions({
@@ -33,10 +36,36 @@ const Home = (list) => {
     },
   });
   const [mylist, setMylist] = useState(list.data);
+  let store = useState({})
+  const getData = (id) => {
+    axios.get(`${servicePath.getTypeList}${id}`).then((res) => {
+      let data=JSON.parse(JSON.stringify(res.data))
+      setMylist(data)
+    })
+  }
+  const getIndexData=()=>{
+    axios.get(servicePath.getArticleList).then((res)=>{
+      let data=JSON.parse(JSON.stringify(res.data))
+      setMylist(data)
+    })
+  }
+  useEffect(() => {
+    if(utils.getQueryVariable('typeid')==0 || utils.getQueryVariable('typeid')==null){
+      getIndexData()
+    }else {
+      getData(utils.getQueryVariable('typeid'))
+    }
+  }, [store[0]])
   
-
-
+  useEffect(() => {
+    if(utils.getQueryVariable('typeid')==0 || utils.getQueryVariable('typeid')==null){
+      getIndexData()
+    }else {
+      getData(utils.getQueryVariable('typeid'))
+    }
+  },[])
   return (
+    <context.Provider value={store}>
     <div>
       <Head>
         <title>Goldaner的生活记录仪</title>
@@ -85,14 +114,7 @@ const Home = (list) => {
       </Row>
       <Footer />
     </div>
+    </context.Provider>
   );
 };
-Home.getInitialProps = async (ctx) => {
-  
-  const res = await axios.get(servicePath.getArticleList);
-  
-  return {
-    data: res.data,
-  };
-};
-export default Home;
+export default withRouter(Home); 

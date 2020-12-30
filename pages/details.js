@@ -5,7 +5,7 @@ import Header from '../components/Header'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
 import Author from '../components/Author'
-import '../static/styles/components/details.styl'
+import '../static/styles/components/details.css'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai.css'
@@ -22,6 +22,7 @@ import {
   FolderOpenOutlined,
   FireOutlined
 } from '@ant-design/icons'
+import { context } from '../store'
 const Details = (props) => {
   const renderer = new marked.Renderer()
   const tocify = new Tocify()
@@ -31,8 +32,9 @@ const Details = (props) => {
     const anchor = tocify.add(text, level)
     return `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>\n`
   }
+  let store = useState({})
   useEffect(() => {
-    console.log(props.router)
+    console.log(store)
     const id = utils.getQueryVariable('id')
     axios.get(`${servicePath.getArticleById}${id}`).then((res) => {
       setDatilsData(res.data[0])
@@ -52,8 +54,9 @@ const Details = (props) => {
       return hljs.highlightAuto(code).value
     }
   })
-
+  
   return (
+    <context.Provider value={store}>
     <div>
       <Head>
         <title>博客详细页</title>
@@ -75,17 +78,17 @@ const Details = (props) => {
             <div>
               <div className="detailed-title">{detailsData.title}</div>
               <div className="list-icon center">
-                <span>
-                  <CalendarOutlined />
-                  {detailsData.addTime}
+                <span className="mr-8">
+                  <CalendarOutlined/>
+                  <i className="ml-2">{detailsData.addTime}</i>
                 </span>
-                <span>
+                <span className="mr-8">
                   <FolderOpenOutlined />
-                  {detailsData.typeName}
+                  <i className="ml-2">{detailsData.typeName}</i>
                 </span>
-                <span>
+                <span className="mr-8">
                   <FireOutlined />
-                  {detailsData.viewCount}
+                  <i className="ml-2">{detailsData.viewCount}</i>
                 </span>
               </div>
 
@@ -110,6 +113,7 @@ const Details = (props) => {
       </Row>
       <Footer />
     </div>
+    </context.Provider>
   )
 }
 
