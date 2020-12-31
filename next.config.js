@@ -10,9 +10,10 @@ module.exports = withCSS({
   devIndicators: {
     autoPrerender: false,
   },
-  exportTrailingSlash: isProd,
+  // exportTrailingSlash: isProd,
   //  打包静态目录时开启，每个页面单独一个包里面生成index.html，为路由
-  assetPrefix: isProd ? 'http://www.goldaner.com' : './',
+  // assetPrefix: isProd ? 'http://www.goldaner.com' : './',
+  // assetPrefix: isProd ? '127.0.0.1' : './',
   //资源项，设置以免404
 });
 // module.exports = withStylus(withCSS({

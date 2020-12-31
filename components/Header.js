@@ -13,21 +13,11 @@ const Header = (props) => {
   const [navArray, setNavArray] = useState([])
   const setId = useContext(context)[1]
   useEffect(() => {
-    // axios(servicePath.getTypeInfo).then((res) => {
-    //   setNavArray(res.data)
-    // })
-
-
-    axios({
-      method: 'get',
-      url: servicePath.getTypeInfo,
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }).then((result) => {
-      setNavArray(result.data)
+    axios(servicePath.getTypeInfo).then((res) => {
+      setNavArray(res.data)
     })
+
+
     
   }, [])
   //   []只有第一次进入组件执行
