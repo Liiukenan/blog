@@ -3,8 +3,7 @@ import "../static/styles/components/footer.css"
 const Footer = (props) => {
   return (
     <div className="footer-div">
-      <div>系统由 React+Node+Ant Desgin驱动 </div>
-      <div>goldaner.com</div>
+      <div>京ICP备2020046597号</div>
     </div>
   );
 };

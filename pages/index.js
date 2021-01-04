@@ -64,6 +64,7 @@ const Home = (list) => {
       getData(utils.getQueryVariable('typeid'))
     }
   },[])
+  
   return (
     <context.Provider value={store}>
     <div>
@@ -109,7 +110,8 @@ const Home = (list) => {
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
           <Author />
-          <Advert />
+          {/* <Advert /> */}
+          
         </Col>
       </Row>
       <Footer />

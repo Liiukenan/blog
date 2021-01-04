@@ -1,6 +1,7 @@
 .author-div{
     text-align: center;
     padding: 1rem;
+    overflow: hidden;
 
 }
 .author-div div{
@@ -15,4 +16,7 @@
     background-color: #999;
     margin-left: .5rem;
     margin-right: .5rem;
+}
+.linkimg img{
+    width: 100%;
 }

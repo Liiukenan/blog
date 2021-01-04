@@ -3,9 +3,9 @@ const withCSS = require("@zeit/next-css");
 // const withStylus = require("@zeit/next-stylus");
 const isProd = process.env.NODE_ENV === 'production'
 
-if (typeof require !== "undefined") {
-  require.extensions[".css"] = (file) => {};
-}
+// if (typeof require !== "undefined") {
+//   require.extensions[".css"] = (file) => {};
+// }
 module.exports = withCSS({
   devIndicators: {
     autoPrerender: false,
