@@ -20,7 +20,7 @@ import {
   FireOutlined,
 } from "@ant-design/icons";
 import { context } from "../store";
-const Home = (list) => {
+const Home = () => {
   const renderer = new marked.Renderer();
   marked.setOptions({
     renderer: renderer,
@@ -35,7 +35,7 @@ const Home = (list) => {
       return hljs.highlightAuto(code).value;
     },
   });
-  const [mylist, setMylist] = useState(list.data);
+  const [mylist, setMylist] = useState(null);
   let store = useState({})
   const getData = (id) => {
     axios.get(`${servicePath.getTypeList}${id}`).then((res) => {
@@ -64,21 +64,10 @@ const Home = (list) => {
       getData(utils.getQueryVariable('typeid'))
     }
   },[])
-  
-  return (
-    <context.Provider value={store}>
-    <div>
-      <Head>
-        <title>Goldaner的生活记录仪</title>
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"
-        />
-      </Head>
-      <Header />
-      <Row className="comm-main" type="flex" justify="center">
-        <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
-          <List
+  function ListData() {
+    if(mylist){
+    return(
+      <List
             header={<div>最新日志</div>}
             itemLayout="vertical"
             dataSource={mylist}
@@ -107,6 +96,28 @@ const Home = (list) => {
               </List.Item>
             )}
           />
+    )
+  }else{
+    return(
+      <div>
+      </div>
+    )
+  }
+  }
+  return (
+    <context.Provider value={store}>
+    <div>
+      <Head>
+        <title>Goldaner的个人博客</title>
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"
+        />
+      </Head>
+      <Header />
+      <Row className="comm-main" type="flex" justify="center">
+        <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
+          <ListData />
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
           <Author />

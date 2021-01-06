@@ -31,8 +31,10 @@ const Header = (props) => {
   return (
     <div className="header">
       <Row type="flex" justify="center">
-        <Col xs={24} sm={24} md={10} lg={15} xl={12}>
-          <span className="header-logo">Goldaner</span>
+        <Col xs={24} sm={24} md={10} lg={15} xl={12} className="flex-items-center">
+          <span className="header-logo">
+            <img src="./images/logo.jpg" alt=""/>
+          </span>
           <span className="header-txt">记录生活点滴，记录web前端</span>
         </Col>
         <Col xs={24} sm={24} md={14} lg={8} xl={6}>

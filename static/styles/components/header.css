@@ -5,11 +5,13 @@
     height: 2.8rem;
     border-bottom: 1px solid #ccc;
 }
-    
 .header-logo{
-  color: #1e90ff;
+    color: #1e90ff;
     font-size: 1.4rem;
     text-align: left;
+}
+.header-logo img{
+    height: 2.4rem;
 }
     
 .header-txt{

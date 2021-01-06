@@ -22,16 +22,19 @@ class HomeController extends Controller {
     this.ctx.body = results;
   }
   async getArticleById() {
+    // 文章详情页
     let id = this.ctx.params.id;
-    let sql = `SELECT id AS id, 
-             title AS title, 
+    let sql1=`UPDATE article SET view_count=view_count+1 WHERE id='${id}'`;
+    let sql2 = `SELECT id AS id, 
+             title AS title,
              introduce AS introduce,
              FROM_UNIXTIME(add_time,"%Y-%m-%d %H:%i:%s") AS addTime, 
              type_name AS typeName,
              article_content AS articleContent, 
              view_count AS viewCount FROM article
              WHERE id='${id}'`;
-    const result = await this.app.mysql.query(sql);
+    await this.app.mysql.query(sql1);
+    const result =await this.app.mysql.query(sql2);
     this.ctx.body = result;
   }
   async getTypeInfo() {

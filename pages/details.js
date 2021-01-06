@@ -70,8 +70,8 @@ const Details = (props) => {
                 <Breadcrumb.Item>
                   <a href="/">首页 </a>
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>视频列表</Breadcrumb.Item>
-                <Breadcrumb.Item>xxxx</Breadcrumb.Item>
+                <Breadcrumb.Item>{detailsData.typeName}</Breadcrumb.Item>
+                <Breadcrumb.Item>{detailsData.title}</Breadcrumb.Item>
               </Breadcrumb>
             </div>
 
@@ -102,7 +102,7 @@ const Details = (props) => {
 
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
           <Author />
-          <Advert />
+          {/* <Advert /> */}
           <Affix offsetTop={5}>
             <div className="detailed-nav comm-box">
               <div className="nav-title">文章目录</div>
