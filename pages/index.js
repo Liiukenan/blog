@@ -20,7 +20,7 @@ import {
   FireOutlined,
 } from "@ant-design/icons";
 import { context } from "../store";
-const Home = () => {
+const Home = (props) => {
   const renderer = new marked.Renderer();
   marked.setOptions({
     renderer: renderer,
@@ -36,7 +36,8 @@ const Home = () => {
     },
   });
   const [mylist, setMylist] = useState(null);
-  let store = useState({})
+  console.log(props);
+  let store = useState(0)
   const getData = (id) => {
     axios.get(`${servicePath.getTypeList}${id}`).then((res) => {
       let data=JSON.parse(JSON.stringify(res.data))
@@ -50,20 +51,12 @@ const Home = () => {
     })
   }
   useEffect(() => {
-    if(utils.getQueryVariable('typeid')==0 || utils.getQueryVariable('typeid')==null){
-      getIndexData()
-    }else {
+    if(props.data.query.typeid!=0){
       getData(utils.getQueryVariable('typeid'))
-    }
-  }, [store[0]])
-  
-  useEffect(() => {
-    if(utils.getQueryVariable('typeid')==0 || utils.getQueryVariable('typeid')==null){
+    }else{
       getIndexData()
-    }else {
-      getData(utils.getQueryVariable('typeid'))
     }
-  },[])
+  },[props.data.query.typeid])
   function ListData() {
     if(mylist){
     return(
@@ -79,20 +72,20 @@ const Home = () => {
                   </Link>
                 </div>
                 <div className="list-icon">
-                  <span>
+                  <i>
                     <CalendarOutlined />
                     {item.addTime}
-                  </span>
-                  <span>
+                  </i>
+                  <i>
                     <FolderOpenOutlined />
                     {item.typeName}
-                  </span>
-                  <span>
+                  </i>
+                  <i>
                     <FireOutlined />
-                    {item.viewCount}人
-                  </span>
+                    {item.viewCount}
+                  </i>
                 </div>
-                <div className="list-context" dangerouslySetInnerHTML={{__html:marked(item.articleContent)}}></div>
+                {/* <div className="list-context" dangerouslySetInnerHTML={{__html:marked(item.articleContent)}}></div> */}
               </List.Item>
             )}
           />
@@ -130,4 +123,16 @@ const Home = () => {
     </context.Provider>
   );
 };
+export async function getServerSideProps({query}) {
+  // Fetch data from external API
+  if(!query.typeid){
+    query.typeid=0
+  }
+  const data = {
+    query
+  }
+
+  // Pass data to the page via props
+  return { props: { data } }
+}
 export default withRouter(Home); 

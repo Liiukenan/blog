@@ -4,10 +4,16 @@ import { Row, Col, Menu } from 'antd'
 import Router from 'next/router'
 import Link from 'next/link'
 import axios from 'axios'
+import Head from 'next/head'
 import servicePath from '../config/servicePath'
 // import store from "../store";
-import * as Icon from '@ant-design/icons'
+// import * as Icon from '@ant-design/icons'
 import { context } from '../store'
+import { createFromIconfontCN } from '@ant-design/icons';
+
+const IconFont = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_2314372_8if6hkxuz0m.js',
+});
 const Header = (props) => {
   // const hoxData = store();
   const [navArray, setNavArray] = useState([])
@@ -28,8 +34,13 @@ const Header = (props) => {
     // hoxData.handleClickId(e.key);
     Router.push('/?typeid=' + e.key)
   }
+  
+  // selectedKeys={[props.history.location.pathname]}
   return (
     <div className="header">
+      <Head>
+        <meta name="description" content="记录前端开发遇到的一些问题，以及分享技术圈一些比较新的技术，当然程序猿也有生活，我也要写写程序猿的生活"/>
+      </Head>
       <Row type="flex" justify="center">
         <Col xs={24} sm={24} md={10} lg={15} xl={12} className="flex-items-center">
           <span className="header-logo">
@@ -40,21 +51,25 @@ const Header = (props) => {
         <Col xs={24} sm={24} md={14} lg={8} xl={6}>
           <Menu mode="horizontal" onClick={handleClick}>
             <Menu.Item key="0">
-                {
+                {/* {
                     React.createElement(
                         Icon["HomeOutlined"]
                     )
-                }
+                } */}
+                <IconFont type="iconshouye" style={{fontSize:"16px"}}/>
                 首页
             </Menu.Item>
             {navArray.map((item) => {
               return (
                   <Menu.Item key={item.id}>
-                    {
+                    {/* {
                         React.createElement(
                             Icon[item.icon]
                         )
                     }
+                    {item.typeName} */}
+                    
+                    <IconFont type={item.icon} style={{fontSize:"16px"}}/>
                     {item.typeName}
                   </Menu.Item>
               )
@@ -66,3 +81,11 @@ const Header = (props) => {
   )
 }
 export default Header
+
+
+
+
+
+
+
+

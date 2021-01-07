@@ -4,6 +4,25 @@
 #### 四级标题
 ##### 五级标题
 ###### 六级标题 -->
+
+### 6. 管理工具栏
+
+为了便于管理您的文稿，在 **预览区** 的顶部放置了如下所示的 **管理工具栏**：
+
+![tool-manager](https://www.zybuluo.com/static/img/toolbar-manager.jpg)
+
+通过管理工具栏可以：
+
+<i class="icon-share"></i> 发布：将当前的文稿生成固定链接，在网络上发布，分享
+<i class="icon-file"></i> 新建：开始撰写一篇新的文稿
+<i class="icon-trash"></i> 删除：删除当前的文稿
+<i class="icon-cloud"></i> 导出：将当前的文稿转化为 Markdown 文本或者 Html 格式，并导出到本地
+<i class="icon-reorder"></i> 列表：所有新增和过往的文稿都可以在这里查看、操作
+<i class="icon-pencil"></i> 模式：切换 普通/Vim/Emacs 编辑模式
+**aa**
+<div style='display:none'>
+我是注释啊
+</div>
 ## 二级标题
 *斜体文本*
 _斜体文本_

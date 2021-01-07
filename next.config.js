@@ -10,6 +10,9 @@ module.exports = withCSS({
   devIndicators: {
     autoPrerender: false,
   },
+  stats: {
+      children: false,
+  }
   // exportTrailingSlash: isProd,
   //  打包静态目录时开启，每个页面单独一个包里面生成index.html，为路由
   // assetPrefix: isProd ? 'http://www.goldaner.com' : './',

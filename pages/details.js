@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { Row, Col, Breadcrumb, Affix } from 'antd'
 import Header from '../components/Header'
+import Author from '../components/Author'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
-import Author from '../components/Author'
+
 import '../static/styles/components/details.css'
 import marked from 'marked'
 import hljs from 'highlight.js'
@@ -34,7 +35,6 @@ const Details = (props) => {
   }
   let store = useState({})
   useEffect(() => {
-    console.log(store)
     const id = utils.getQueryVariable('id')
     axios.get(`${servicePath.getArticleById}${id}`).then((res) => {
       setDatilsData(res.data[0])

@@ -32,7 +32,7 @@ const Author=()=>{
             <Avatar size={100} src="../images/baby.jpeg" />
             </div>
             <div className="author-introduction">
-                关注前沿web技术，记录生活点滴
+            生活要有目标，但我们不是为了目标而生活。
                 <Divider>社交账号</Divider>
                 <Link href="https://github.com/Liiukenan">
                   <GithubOutlined style={{fontSize:'28px'}} onMouseOver={()=>dispatch({type:0})}/>
