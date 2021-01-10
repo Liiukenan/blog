@@ -36,7 +36,6 @@ const Home = (props) => {
     },
   });
   const [mylist, setMylist] = useState(null);
-  console.log(props);
   let store = useState(0)
   const getData = (id) => {
     axios.get(`${servicePath.getTypeList}${id}`).then((res) => {

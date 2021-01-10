@@ -12,7 +12,7 @@ import { context } from '../store'
 import { createFromIconfontCN } from '@ant-design/icons';
 
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2314372_8if6hkxuz0m.js',
+  scriptUrl: '//at.alicdn.com/t/font_2314372_77uyq3ihffx.js',
 });
 const Header = (props) => {
   // const hoxData = store();
