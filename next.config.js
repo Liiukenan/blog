@@ -1,12 +1,12 @@
 // next.config.js
 const withCSS = require("@zeit/next-css");
-// const withStylus = require("@zeit/next-stylus");
+const withStylus = require("@zeit/next-stylus");
 const isProd = process.env.NODE_ENV === 'production'
 
 // if (typeof require !== "undefined") {
 //   require.extensions[".css"] = (file) => {};
 // }
-module.exports = withCSS({
+module.exports = withStylus(withCSS({
   devIndicators: {
     autoPrerender: false,
   },
@@ -18,7 +18,7 @@ module.exports = withCSS({
   // assetPrefix: isProd ? 'http://www.goldaner.com' : './',
   // assetPrefix: isProd ? '127.0.0.1' : './',
   //资源项，设置以免404
-});
+}));
 // module.exports = withStylus(withCSS({
 //   devIndicators: {
 //     autoPrerender: false,

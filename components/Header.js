@@ -10,7 +10,6 @@ import servicePath from '../config/servicePath'
 // import * as Icon from '@ant-design/icons'
 import { context } from '../store'
 import { createFromIconfontCN } from '@ant-design/icons';
-
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_2314372_77uyq3ihffx.js',
 });
@@ -39,7 +38,9 @@ const Header = (props) => {
   return (
     <div className="header">
       <Head>
-        <meta name="description" content="记录前端开发遇到的一些问题，以及分享技术圈一些比较新的技术，当然程序猿也有生活，我也要写写程序猿的生活"/>
+      <meta name="keywords" content="前端 前端开发 web前端 程序员 程序猿 javascript typescript nextjs vue react mysql mongodb koa2 webpack 插件"/>
+        <meta name="description" content="记录工作中遇到的一些问题以及学习到的前端一些新技术，还有生活中的酸甜苦辣。"/>
+        <meta name="baidu-site-verification" content="code-frbB9UTz1K" />
       </Head>
       <Row type="flex" justify="center">
         <Col xs={24} sm={24} md={10} lg={15} xl={12} className="flex-items-center">
@@ -50,13 +51,13 @@ const Header = (props) => {
         </Col>
         <Col xs={24} sm={24} md={14} lg={8} xl={6}>
           <Menu mode="horizontal" onClick={handleClick}>
-            <Menu.Item key="0">
+            <Menu.Item key="0" className="flex-items-center">
                 {/* {
                     React.createElement(
                         Icon["HomeOutlined"]
                     )
                 } */}
-                <IconFont type="iconshouye" style={{fontSize:"16px"}}/>
+                <IconFont type="iconshouye2" style={{fontSize:"16px"}}/>
                 首页
             </Menu.Item>
             {navArray.map((item) => {

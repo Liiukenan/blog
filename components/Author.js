@@ -37,10 +37,10 @@ const Author=()=>{
                 <Link href="https://github.com/Liiukenan">
                   <GithubOutlined style={{fontSize:'28px'}} onMouseOver={()=>dispatch({type:0})}/>
                 </Link>
-                <Link  href="http://wpa.qq.com/msgrd?v=3&uin=305290526&site=qq&menu=yes">
+                <Link  href="javascript:void(0)">
                   <QqOutlined  style={{fontSize:'28px',marginLeft:'10px'}} onMouseOver={()=>dispatch({type:1})}/>
                 </Link>
-                <Link href="http://baidu.com">
+                <Link href="javascript:void(0)">
                   <WechatOutlined  style={{fontSize:'28px',marginLeft:'10px'}} onMouseOver={()=>dispatch({type:2})}/>
                 </Link>
             

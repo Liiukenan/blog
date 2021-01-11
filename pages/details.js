@@ -5,7 +5,6 @@ import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
-
 import '../static/styles/components/details.css'
 import marked from 'marked'
 import hljs from 'highlight.js'
@@ -25,22 +24,14 @@ import {
 } from '@ant-design/icons'
 import { context } from '../store'
 const Details = (props) => {
-  const renderer = new marked.Renderer()
   const tocify = new Tocify()
-  const [detailsData, setDatilsData] = useState({})
-  const [html, setHtml] = useState('')
+  const renderer = new marked.Renderer()
+  const detailsData=props.data[0];
   renderer.heading = function (text, level, raw) {
     const anchor = tocify.add(text, level)
     return `<a id="${anchor}" href="#${anchor}" class="anchor-fix">${text}<h${level}></a>\n`
   }
   let store = useState({})
-  useEffect(() => {
-    const id = utils.getQueryVariable('id')
-    axios.get(`${servicePath.getArticleById}${id}`).then((res) => {
-      setDatilsData(res.data[0])
-      setHtml(marked(res.data[0].articleContent))
-    })
-  }, [])
   marked.setOptions({
     renderer: renderer,
     gfm: true,
@@ -54,12 +45,13 @@ const Details = (props) => {
       return hljs.highlightAuto(code).value
     }
   })
-  
+  let html = marked(props.data[0].articleContent) 
+
   return (
     <context.Provider value={store}>
     <div>
       <Head>
-        <title>博客详细页</title>
+        <title>{detailsData.title}</title>
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">
@@ -68,7 +60,7 @@ const Details = (props) => {
             <div className="bread-div">
               <Breadcrumb>
                 <Breadcrumb.Item>
-                  <a href="/">首页 </a>
+                  <a href="/">首页</a>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{detailsData.typeName}</Breadcrumb.Item>
                 <Breadcrumb.Item>{detailsData.title}</Breadcrumb.Item>
@@ -107,6 +99,7 @@ const Details = (props) => {
             <div className="detailed-nav comm-box">
               <div className="nav-title">文章目录</div>
               {tocify && tocify.render()}
+              
             </div>
           </Affix>
         </Col>
@@ -116,5 +109,8 @@ const Details = (props) => {
     </context.Provider>
   )
 }
-
+export async function getServerSideProps({query}) {
+  const res=await axios.get(servicePath.getArticleById+query.id);
+  return { props: { data:res.data} }
+}
 export default withRouter(Details)
