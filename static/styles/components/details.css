@@ -74,8 +74,13 @@ iframe{
     height: 34rem;
 }
 .detailed-content  img{
-    width: 100%;
-    border:1px solid #f3f3f3;
+    max-width: 100%;
+
+}
+.detailed-content div{
+    display: flex;
+    justify-content: center;
+
 }
 .title-level3{
     display: none !important;
